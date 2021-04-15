@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现全局弹框</title>
+    <style>
+        #modal {
+            height: 200px;
+            width: 200px;
+            line-height: 200px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="open">打开弹框</button>
+    <button id="close">关闭弹框</button>
+    <script>
+        const Model = (function(){
+            let instance = null
+            return function() {
+                if(!instance) {
+                    instance = document.createElement('div')
+                    instance.innerHTML = '我是一个弹窗'
+                    instance.id = 'modal'
+                    document.body.appendChild(instance)
+                }
+
+                return instance
+            }
+        })()
+
+        document.getElementById('open').addEventListener('click',() => {
+            const model = new Model()
+            model.style.display = 'block'
+        })
+
+        document.getElementById('close').addEventListener('click',() => {
+            const model = new Model()
+            model.style.display = 'none'
+        })
+    </script>
+</body>
+</html>
